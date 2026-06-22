@@ -64,7 +64,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
       <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm">
         {employee && (
           <EmployeeForm 
-            defaultValues={employee} 
+            defaultValues={employee as unknown as EmployeeFormData} 
             onSubmit={onSubmit} 
             isLoading={isSaving} 
           />

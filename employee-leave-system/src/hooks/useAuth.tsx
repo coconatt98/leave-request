@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(
     async (username: string, password: string) => {
-      const success = AuthStorageService.login(username, password);
+      const success = await AuthStorageService.login(username, password);
       if (success) {
         refreshSession();
       }

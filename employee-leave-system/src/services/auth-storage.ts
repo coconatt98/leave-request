@@ -16,7 +16,7 @@ export class AuthStorageService {
     if (typeof window === "undefined") return false;
 
     // First check mock users (e.g. admin, approver, inputter fallback)
-    let user = MOCK_USERS.find(
+    let user: { username: string; password?: string; role: UserRole } | undefined = MOCK_USERS.find(
       (u) => u.username === username && u.password === password
     );
     let role = user?.role as UserRole;

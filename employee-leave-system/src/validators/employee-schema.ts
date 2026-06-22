@@ -13,11 +13,7 @@ export const employeeSchema = z.object({
     .string()
     .min(1, "Position is required")
     .max(100, "Position must be at most 100 characters"),
-  role: z
-    .enum(["ADMIN", "INPUTTER", "APPROVER"], {
-      required_error: "Role is required",
-    })
-    .default("INPUTTER"),
+  role: z.enum(["ADMIN", "INPUTTER", "APPROVER"]),
   username: z
     .string()
     .min(3, "Username must be at least 3 characters")

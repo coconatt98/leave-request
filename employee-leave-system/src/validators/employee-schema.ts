@@ -10,7 +10,7 @@ export const employeeSchema = z.object({
     .min(1, "Department is required")
     .max(100, "Department must be at most 100 characters"),
   position: z.enum(["Developer", "Team Lead", "Manager"], {
-    required_error: "Position is required",
+    message: "Position is required",
   }),
   role: z.enum(["ADMIN", "INPUTTER", "APPROVER"]),
   username: z

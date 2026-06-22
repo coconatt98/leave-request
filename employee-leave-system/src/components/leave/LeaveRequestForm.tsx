@@ -78,7 +78,7 @@ export function LeaveRequestForm({
       : "Submit Request";
 
   const fieldClasses =
-    "border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40 disabled:bg-[#1a1a1c]";
+    "border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#7b7b81] focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40 disabled:bg-slate-50 dark:disabled:bg-[#1a1a1c]";
 
   const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
@@ -90,13 +90,13 @@ export function LeaveRequestForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-2xl space-y-4 rounded-2xl border border-[rgba(255,90,95,0.35)] bg-[#1a1a1c] p-6 shadow-[0_18px_40px_rgba(255,77,87,0.12)]"
+      className="max-w-2xl space-y-4 rounded-2xl border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#1a1a1c] p-6 shadow-sm dark:shadow-[0_18px_40px_rgba(255,77,87,0.12)]"
     >
       {/* Employee Select */}
       <div className={formSectionClass}>
         <Label
           htmlFor="employeeId"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Employee
         </Label>
@@ -143,7 +143,7 @@ export function LeaveRequestForm({
           )}
         />
         {errors.employeeId && (
-          <p id="employeeId-error" className="text-sm text-[#ff949a]">
+          <p id="employeeId-error" className="text-sm text-red-500 dark:text-[#ff949a]">
             {errors.employeeId.message}
           </p>
         )}
@@ -153,7 +153,7 @@ export function LeaveRequestForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="startDate"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Start Date
         </Label>
@@ -167,7 +167,7 @@ export function LeaveRequestForm({
           aria-describedby={errors.startDate ? "startDate-error" : undefined}
         />
         {errors.startDate && (
-          <p id="startDate-error" className="text-sm text-[#ff949a]">
+          <p id="startDate-error" className="text-sm text-red-500 dark:text-[#ff949a]">
             {errors.startDate.message}
           </p>
         )}
@@ -177,7 +177,7 @@ export function LeaveRequestForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="endDate"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           End Date
         </Label>
@@ -191,7 +191,7 @@ export function LeaveRequestForm({
           aria-describedby={errors.endDate ? "endDate-error" : undefined}
         />
         {errors.endDate && (
-          <p id="endDate-error" className="text-sm text-[#ff949a]">
+          <p id="endDate-error" className="text-sm text-red-500 dark:text-[#ff949a]">
             {errors.endDate.message}
           </p>
         )}
@@ -201,7 +201,7 @@ export function LeaveRequestForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="reason"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Reason
         </Label>
@@ -215,7 +215,7 @@ export function LeaveRequestForm({
           aria-describedby={errors.reason ? "reason-error" : undefined}
         />
         {errors.reason && (
-          <p id="reason-error" className="text-sm text-[#ff949a]">
+          <p id="reason-error" className="text-sm text-red-500 dark:text-[#ff949a]">
             {errors.reason.message}
           </p>
         )}
@@ -231,7 +231,7 @@ export function LeaveRequestForm({
           variant="ghost"
           onClick={() => router.back()}
           disabled={isLoading}
-          className="text-sm text-white"
+          className="text-sm text-slate-700 dark:text-white hover:text-slate-900 dark:hover:text-white"
         >
           Cancel
         </Button>

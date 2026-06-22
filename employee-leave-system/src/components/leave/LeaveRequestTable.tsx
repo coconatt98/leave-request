@@ -70,7 +70,7 @@ export function LeaveRequestTable({
 
   if (leaveRequests.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-[rgba(255,90,95,0.35)] bg-[#1a1a1c] py-16 text-center text-[#cfcfd2] shadow-[0_18px_40px_rgba(255,77,87,0.12)]">
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#1a1a1c] py-16 text-center text-slate-500 dark:text-[#cfcfd2] shadow-sm dark:shadow-[0_18px_40px_rgba(255,77,87,0.12)]">
         <p className="text-lg font-semibold text-white">No leave requests found</p>
         <p className="mt-1 text-sm">
           There are no requests matching the current filter.
@@ -102,30 +102,30 @@ export function LeaveRequestTable({
 
             return (
               <TableRow key={request.id} className={cn(tableRowClass, "last:border-0")}> 
-                <TableCell className="px-4 py-2.5 text-xs text-[#cfcfd2]">
+                <TableCell className="px-4 py-2.5 text-xs text-slate-500 dark:text-[#cfcfd2]">
                   {index + 1}
                 </TableCell>
                 <TableCell className="px-4 py-2.5 text-sm font-semibold text-white">
                   {employeeMap.get(request.employeeId) ?? request.employeeId}
                 </TableCell>
-                <TableCell className="px-4 py-2.5 text-sm text-[#cfcfd2]">
+                <TableCell className="px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                   <span className="animate-in fade-in duration-200" style={{ animationDelay: `${index * 20}ms` }}>
                     {formatDate(request.startDate)}
                   </span>
                 </TableCell>
-                <TableCell className="px-4 py-2.5 text-sm text-[#cfcfd2]">
+                <TableCell className="px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                   <span className="animate-in fade-in duration-200" style={{ animationDelay: `${index * 20 + 40}ms` }}>
                     {formatDate(request.endDate)}
                   </span>
                 </TableCell>
-                <TableCell className="max-w-[240px] px-4 py-2.5 text-sm text-[#cfcfd2]">
+                <TableCell className="max-w-[240px] px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                   {request.reason}
                 </TableCell>
                 <TableCell className="px-4 py-2.5">
                   <div className="animate-in fade-in zoom-in-50 duration-300 flex flex-col gap-1 items-start">
                     <LeaveStatusBadge status={request.status} />
                     {request.approvedBy && request.status !== "PENDING" && (
-                      <span className="text-[10px] text-[#7b7b81] italic">
+                      <span className="text-[10px] text-slate-400 dark:text-[#7b7b81] italic">
                         by {request.approvedBy}
                       </span>
                     )}

@@ -8,6 +8,7 @@ export type DashboardStats = {
   pendingRequests: number;
   approvedRequests: number;
   rejectedRequests: number;
+  departmentStats: Array<{ department: string; count: number }>;
 };
 
 export function useDashboardStats() {
@@ -16,6 +17,7 @@ export function useDashboardStats() {
     pendingRequests: 0,
     approvedRequests: 0,
     rejectedRequests: 0,
+    departmentStats: [],
   });
 
   const [isLoading, setIsLoading] = useState(true);

@@ -19,19 +19,19 @@ export function StatCard({
   return (
     <div
       className={cn(
-        "flex items-center justify-between rounded-2xl border border-[rgba(255,90,95,0.35)] bg-[#1a1a1c] p-4 shadow-[0_18px_40px_rgba(255,77,87,0.12)]",
+        "flex items-center justify-between rounded-2xl border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#1a1a1c] p-4 shadow-sm dark:shadow-[0_18px_40px_rgba(255,77,87,0.12)]",
         className
       )}
     >
       <div className="space-y-0.5">
-        <span className="text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-[#cfcfd2]">
+        <span className="text-[0.68rem] font-semibold uppercase tracking-[0.25em] text-slate-500 dark:text-[#cfcfd2]">
           {title}
         </span>
-        <div className="text-2xl font-bold tracking-tight text-white">{value}</div>
+        <div className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">{value}</div>
       </div>
       <div
         className={cn(
-          "flex h-10 w-10 items-center justify-center rounded-2xl border border-[rgba(255,77,87,0.5)] bg-[rgba(255,77,87,0.15)] text-[#ff4d57] shadow-[0_6px_16px_rgba(255,77,87,0.25)]",
+          "flex h-10 w-10 items-center justify-center rounded-2xl border border-red-200 dark:border-[rgba(255,77,87,0.5)] bg-red-50 dark:bg-[rgba(255,77,87,0.15)] text-red-500 dark:text-[#ff4d57] shadow-sm dark:shadow-[0_6px_16px_rgba(255,77,87,0.25)]",
           iconClassName
         )}
       >

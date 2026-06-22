@@ -53,7 +53,7 @@ export default async function CodeReviewPage() {
         </div>
       </PageHeader>
 
-      <p className="rounded-2xl border border-white/70 bg-white/90 p-3 text-sm text-[#0f1c2f] shadow-[0_10px_25px_rgba(15,98,254,0.08)]">
+      <p className="rounded-2xl border border-white/70 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-3 text-sm text-[#0f1c2f] dark:text-slate-200 shadow-sm">
         {data.summary}
       </p>
 
@@ -64,11 +64,11 @@ export default async function CodeReviewPage() {
         ))}
       </div>
 
-      <section className="rounded-2xl border border-white/70 bg-white/95 p-4 shadow-[0_20px_45px_rgba(15,98,254,0.12)]">
+      <section className="rounded-2xl border border-white/70 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 p-4 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-[#0f1c2f]">Review Matrix</h2>
-            <p className="text-sm text-[#5a6270]">
+            <h2 className="text-lg font-semibold text-[#0f1c2f] dark:text-white">Review Matrix</h2>
+            <p className="text-sm text-[#5a6270] dark:text-slate-400">
               Snapshot of each area, its status, and recommended remediation
             </p>
           </div>
@@ -86,15 +86,30 @@ export default async function CodeReviewPage() {
           <TableBody>
             {data.rows.map((row) => (
               <TableRow key={`${row.area}-${row.severity}`}>
-                <TableCell className="font-semibold text-[#0f1c2f]">{row.area}</TableCell>
-                <TableCell>{row.status}</TableCell>
+                <TableCell className="font-semibold text-[#0f1c2f] dark:text-slate-200">{row.area}</TableCell>
+                <TableCell className="dark:text-slate-300">{row.status}</TableCell>
                 <TableCell>
                   <SeverityBadge level={row.severity} />
                 </TableCell>
-                <TableCell className="max-w-[320px] text-sm text-[#5a6270]">
-                  {row.finding}
+                <TableCell className="max-w-[320px] text-sm text-[#5a6270] dark:text-slate-300 whitespace-normal">
+                  {row.finding.includes('•') ? (
+                    <ul className="space-y-1.5">
+                      {row.finding
+                        .split('•')
+                        .map(str => str.trim())
+                        .filter(Boolean)
+                        .map((point, i) => (
+                          <li key={i} className="flex items-start gap-1.5">
+                            <span className="text-[#0f62fe] dark:text-blue-400 mt-0.5">•</span>
+                            <span className="leading-relaxed">{point}</span>
+                          </li>
+                        ))}
+                    </ul>
+                  ) : (
+                    row.finding
+                  )}
                 </TableCell>
-                <TableCell className="max-w-[320px] text-sm text-[#0f1c2f]">
+                <TableCell className="max-w-[320px] text-sm text-[#0f1c2f] dark:text-slate-200 whitespace-normal">
                   {row.recommendation}
                 </TableCell>
               </TableRow>
@@ -107,10 +122,10 @@ export default async function CodeReviewPage() {
         {data.details.map((detail) => (
           <article
             key={detail.heading}
-            className="rounded-2xl border border-white/60 bg-white/90 p-4 shadow-[0_12px_32px_rgba(15,98,254,0.08)]"
+            className="rounded-2xl border border-white/60 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-4 shadow-sm"
           >
-            <h3 className="text-base font-semibold text-[#0f1c2f]">{detail.heading}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-[#5a6270] whitespace-pre-line">
+            <h3 className="text-base font-semibold text-[#0f1c2f] dark:text-white">{detail.heading}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-[#5a6270] dark:text-slate-300 whitespace-pre-line">
               {detail.body}
             </p>
           </article>

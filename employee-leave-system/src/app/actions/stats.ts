@@ -10,10 +10,21 @@ export async function getDashboardStatsAction() {
     prisma.leaveRequest.count({ where: { status: "REJECTED" } }),
   ]);
 
+  const employeesByDepartment = await prisma.employee.groupBy({
+    by: ['department'],
+    _count: { id: true },
+  });
+
+  const departmentStats = employeesByDepartment.map(d => ({
+    department: d.department,
+    count: d._count.id
+  }));
+
   return {
     totalEmployees,
     pendingRequests,
     approvedRequests,
     rejectedRequests,
+    departmentStats,
   };
 }

@@ -56,7 +56,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
     return (
       <div className="space-y-6">
         <PageHeader title="Edit Employee" description="Update employee details" />
-        <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm space-y-4 max-w-lg">
+        <div className="bg-slate-50 dark:bg-[#263646] p-6 rounded-[10px] border border-slate-200 dark:border-[#627283] shadow-sm space-y-4 max-w-lg">
           {Array.from({ length: 5 }).map((_, i) => (
             <div key={i} className="space-y-2">
               <Skeleton className="h-4 w-24 bg-[#2b2b2d]" />
@@ -78,7 +78,7 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
         title="Edit Employee" 
         description="Update employee details"
       />
-      <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm">
+      <div className="bg-slate-50 dark:bg-[#263646] p-6 rounded-[10px] border border-slate-200 dark:border-[#627283] shadow-sm">
         {employee && (
           <EmployeeForm 
             defaultValues={employee as unknown as EmployeeFormData} 

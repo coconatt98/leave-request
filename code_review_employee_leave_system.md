@@ -35,19 +35,19 @@ Namun, ada beberapa perbaikan kecil terkait standar keamanan tingkat produksi (X
 
 | Area | Status | Severity | Finding | Recommendation |
 | --- | --- | --- | --- | --- |
-| **Functional Correctness** | PASS | Low | Implementasi fitur jauh melampaui spesifikasi awal. Sistem RBAC beroperasi penuh: `INPUTTER` otomatis ter-*filter* untuk hanya bisa melihat dan memilih dirinya sendiri, sedangkan `APPROVER` telah diberikan hak akses penuh untuk membuat *leave request*. Edge case teratasi. | Pertahankan. Tidak ada isu fungsional kritis. |
-| **Security** | PASS | Medium | Manajemen sesi (*Session Management*) masih menggunakan `localStorage` di sisi *client*. Walaupun sesuai dengan spesifikasi awal (*Local Storage based*), jika aplikasi sudah menggunakan *database backend*, ini rentan terhadap serangan XSS (Cross-Site Scripting). | Pindahkan manajemen sesi ke *HTTP-Only Cookies* menggunakan *Next.js Server Actions* & middleware untuk keamanan *production-grade*. |
-| **Performance** | PASS | Low | Performa sangat baik. Penggunaan komponen Server Actions memangkas *overhead* API tradisional. Penambahan komponen *Skeleton* mengatasi masalah *rendering block*. | Pastikan database Prisma di-cache dengan baik jika jumlah data membengkak. |
-| **Architecture** | PASS | Low | Struktur aplikasi (*Layering*) sangat rapi. Logika bisnis dipisah di `actions/`, komponen UI di `components/`, dan validasi di `validators/`. | Lanjutkan pola ini untuk fitur-fitur baru ke depan. |
-| **Maintainability** | PASS | Low | Kode rapi, nama variabel deskriptif, komponen telah di-*refactor* agar modular (misal: `StatCard` dan `TableSkeleton`). | - |
-| **Type Safety** | PASS | Low | Seluruh masalah pengetikan (*strict type checking*) yang menyebabkan *build error* sebelumnya telah diselesaikan. Zod schema terintegrasi mulus dengan TypeScript interface. | Hindari penggunaan `as unknown as Type` kecuali benar-benar darurat. |
-| **Error Handling** | PASS | Low | Penggunaan *Try/Catch* pada setiap Server Actions dikombinasikan dengan *toast notification* (`sonner`) bekerja dengan sangat aman. Aplikasi tidak akan *crash* saat API gagal. | - |
-| **Validation** | PASS | Low | Zod digunakan secara menyeluruh dan selaras dengan interaktivitas *frontend*. Aturan bisnis sangat ketat: *Start Date* wajib besok ke atas, `Position` dikunci pada 3 opsi baku, dan `Role` *Approver* otomatis lumpuh jika posisi bukan *Manager*. Seluruh celah input tidak valid telah ditutup. | - |
-| **UI/UX** | PASS | Low | Desain modern, mode gelap interaktif, dan navigasi yang mulus. Efek *loading skeleton* menutupi waktu muat jaringan. Atribut `min` pada kalender HTML beroperasi cerdas: memblokir tanggal masa lalu dan memastikan *End Date* tidak bisa mendahului *Start Date*. Sangat memanjakan pengguna. | - |
-| **Accessibility** | PASS | Low | Shadcn UI menggunakan Radix UI di balik layar yang secara bawaan sangat memenuhi standar *accessibility* (WAI-ARIA). | Pastikan label pada tabel tetap jelas bagi *screen reader*. |
-| **Dependency Review** | PASS | Low | Library *up-to-date* (Next.js 16, Prisma 6, React Hook Form). Skrip `postinstall: prisma generate` sudah diamankan di `package.json` untuk menjamin stabilitas *deployment* Vercel. | - |
-| **Logging & Observability** | FAIL | Low | Fitur pelacakan historis belum lengkap. Meskipun ada rekam jejak `approvedBy` di *Leave Request*, tidak ada tabel log terpisah yang mencatat secara mendetail "Siapa melakukan apa dan kapan". | Implementasikan tabel `AuditLog` di Prisma untuk mencatat seluruh aktivitas esensial secara terpusat. |
-| **AI Generated Code Review** | PASS | Low | Kode hasil asisten AI (Antigravity) berhasil disempurnakan dan diperbaiki saat ada galat tipe (*Type Errors*). Tidak terdeteksi adanya halusinasi API atau pustaka *dead code* yang merugikan. | - |
+| **Functional Correctness** | PASS | Low | • Implementasi melampaui spesifikasi awal. • Sistem RBAC beroperasi penuh. • `INPUTTER` difilter otomatis. • `APPROVER` memiliki hak akses penuh untuk *leave request*. | Pertahankan. Tidak ada isu fungsional kritis. |
+| **Security** | PASS | Medium | • Manajemen sesi masih menggunakan `localStorage`. • Sesuai spesifikasi awal namun rentan XSS jika terhubung ke database. | Pindahkan manajemen sesi ke *HTTP-Only Cookies* via *Server Actions*. |
+| **Performance** | PASS | Low | • Performa sangat baik. • Server Actions memangkas *overhead* API. • *Skeleton* mengatasi *rendering block*. | Caching database Prisma jika data membesar. |
+| **Architecture** | PASS | Low | • Struktur *Layering* sangat rapi. • Logika terpisah di `actions/`, `components/`, dan `validators/`. | Lanjutkan pola arsitektur ini. |
+| **Maintainability** | PASS | Low | • Kode rapi dan deskriptif. • Komponen modular (`StatCard`, `TableSkeleton`). | Pertahankan. |
+| **Type Safety** | PASS | Low | • Semua *strict type checking error* diselesaikan. • Zod schema terintegrasi mulus dengan TS. | Hindari penggunaan `as unknown as Type`. |
+| **Error Handling** | PASS | Low | • *Try/Catch* pada setiap Server Actions. • *Toast notification* (`sonner`) bekerja aman. | Pertahankan. |
+| **Validation** | PASS | Low | • Zod digunakan secara menyeluruh. • *Start Date* wajib minimal besok. • `Position` dikunci pada 3 opsi baku. • *Role Approver* dilumpuhkan jika bukan *Manager*. | Pertahankan. |
+| **UI/UX** | PASS | Low | • Desain modern & navigasi mulus. • Efek *loading skeleton* responsif. • Atribut `min` pada kalender beroperasi cerdas. | Pertahankan. |
+| **Accessibility** | PASS | Low | • Shadcn UI (Radix UI) memenuhi standar WAI-ARIA | Pastikan label tabel jelas bagi *screen reader*. |
+| **Dependency** | PASS | Low | • Library *up-to-date* (Next.js 16, Prisma 6). • Skrip `postinstall: prisma generate` diamankan. | Pertahankan. |
+| **Observability** | FAIL | Low | • Fitur pelacakan historis belum lengkap. • Tidak ada tabel log untuk detail riwayat. | Buat tabel `AuditLog` di Prisma. |
+| **AI Generated** | PASS | Low | • Kode AI disempurnakan dengan baik. • Tidak ada halusinasi API atau *dead code*. | Pertahankan. |
 
 ---
 

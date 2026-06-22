@@ -52,20 +52,20 @@ export function EmployeeForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-lg space-y-4 rounded-2xl border border-[rgba(255,90,95,0.35)] bg-[#1a1a1c] p-6 shadow-[0_18px_40px_rgba(255,77,87,0.12)]"
+      className="max-w-lg space-y-4 rounded-2xl border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#1a1a1c] p-6 shadow-sm dark:shadow-[0_18px_40px_rgba(255,77,87,0.12)]"
     >
       {/* Name */}
       <div className={formSectionClass}>
         <Label
           htmlFor="name"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Full Name
         </Label>
         <Input
           id="name"
           placeholder="e.g. John Doe"
-          className="border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40"
+          className="border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#7b7b81] focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("name")}
           aria-describedby={errors.name ? "name-error" : undefined}
         />
@@ -80,14 +80,14 @@ export function EmployeeForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="department"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Department
         </Label>
         <Input
           id="department"
           placeholder="e.g. Engineering"
-          className="border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40"
+          className="border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#7b7b81] focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("department")}
           aria-describedby={errors.department ? "department-error" : undefined}
         />
@@ -102,13 +102,13 @@ export function EmployeeForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="position"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Position
         </Label>
         <select
           id="position"
-          className="flex h-9 w-full rounded-md border border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] px-3 py-1 text-sm text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:border-[#ff4d57] focus-visible:ring-1 focus-visible:ring-[#ff949a]/40"
+          className="flex h-9 w-full rounded-md border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] px-3 py-1 text-sm text-slate-900 dark:text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-1 focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("position")}
           aria-describedby={errors.position ? "position-error" : undefined}
         >
@@ -128,13 +128,13 @@ export function EmployeeForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="role"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Role
         </Label>
         <select
           id="role"
-          className="flex h-9 w-full rounded-md border border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] px-3 py-1 text-sm text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:border-[#ff4d57] focus-visible:ring-1 focus-visible:ring-[#ff949a]/40"
+          className="flex h-9 w-full rounded-md border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] px-3 py-1 text-sm text-slate-900 dark:text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-1 focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("role")}
           aria-describedby={errors.role ? "role-error" : undefined}
         >
@@ -153,14 +153,14 @@ export function EmployeeForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="username"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Username
         </Label>
         <Input
           id="username"
           placeholder="e.g. johndoe"
-          className="border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40"
+          className="border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#7b7b81] focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("username")}
           aria-describedby={errors.username ? "username-error" : undefined}
         />
@@ -175,7 +175,7 @@ export function EmployeeForm({
       <div className={formSectionClass}>
         <Label
           htmlFor="password"
-          className="text-xs font-semibold uppercase tracking-[0.12em] text-white"
+          className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-700 dark:text-white"
         >
           Password
         </Label>
@@ -183,7 +183,7 @@ export function EmployeeForm({
           id="password"
           type="password"
           placeholder="••••••••"
-          className="border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40"
+          className="border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#2b2b2d] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#7b7b81] focus-visible:border-red-400 dark:focus-visible:border-[#ff4d57] focus-visible:ring-red-200 dark:focus-visible:ring-[#ff949a]/40"
           {...register("password")}
           aria-describedby={errors.password ? "password-error" : undefined}
         />
@@ -204,7 +204,7 @@ export function EmployeeForm({
           variant="ghost"
           onClick={() => router.back()}
           disabled={isLoading}
-          className="text-sm text-white"
+          className="text-sm text-slate-700 dark:text-white hover:text-slate-900 dark:hover:text-white"
         >
           Cancel
         </Button>

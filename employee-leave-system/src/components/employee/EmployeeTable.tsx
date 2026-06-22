@@ -31,7 +31,7 @@ export function EmployeeTable({ employees, onDelete }: EmployeeTableProps) {
 
   if (employees.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-2xl border border-[rgba(255,90,95,0.35)] bg-[#1a1a1c] py-16 text-center text-[#cfcfd2] shadow-[0_18px_40px_rgba(255,77,87,0.12)]">
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-red-200 dark:border-[rgba(255,90,95,0.35)] bg-white dark:bg-[#1a1a1c] py-16 text-center text-slate-500 dark:text-[#cfcfd2] shadow-sm dark:shadow-[0_18px_40px_rgba(255,77,87,0.12)]">
         <p className="text-lg font-semibold text-white">No employees found</p>
         <p className="mt-1 text-sm">Add a new employee to get started.</p>
       </div>
@@ -42,7 +42,7 @@ export function EmployeeTable({ employees, onDelete }: EmployeeTableProps) {
     <div className={tableCardClass}>
       <Table>
         <TableHeader>
-          <TableRow className="border-b border-[#f7d7db] bg-transparent">
+          <TableRow className="border-b border-red-100 dark:border-[#f7d7db] bg-transparent">
             <TableHead className={cn(tableHeaderCellClass, "w-12 text-left")}>#</TableHead>
             <TableHead className={tableHeaderCellClass}>Name</TableHead>
             <TableHead className={tableHeaderCellClass}>Department</TableHead>
@@ -56,23 +56,23 @@ export function EmployeeTable({ employees, onDelete }: EmployeeTableProps) {
         <TableBody>
           {employees.map((employee, index) => (
             <TableRow key={employee.id} className={cn(tableRowClass, "last:border-0")}> 
-              <TableCell className="px-4 py-2.5 text-xs text-[#cfcfd2]">
+              <TableCell className="px-4 py-2.5 text-xs text-slate-500 dark:text-[#cfcfd2]">
                 {index + 1}
               </TableCell>
               <TableCell className="px-4 py-2.5 text-sm font-semibold text-white">
                 {employee.name}
               </TableCell>
-              <TableCell className="px-4 py-2.5 text-sm text-[#cfcfd2]">
+              <TableCell className="px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                 <span className="animate-in fade-in duration-200" style={{ animationDelay: `${index * 20}ms` }}>
                   {employee.department}
                 </span>
               </TableCell>
-              <TableCell className="px-4 py-2.5 text-sm text-[#cfcfd2]">
+              <TableCell className="px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                 <span className="animate-in fade-in duration-200" style={{ animationDelay: `${index * 20 + 40}ms` }}>
                   {employee.position}
                 </span>
               </TableCell>
-              <TableCell className="px-4 py-2.5 text-sm text-[#cfcfd2]">
+              <TableCell className="px-4 py-2.5 text-sm text-slate-500 dark:text-[#cfcfd2]">
                 <span className="animate-in fade-in duration-200" style={{ animationDelay: `${index * 20 + 60}ms` }}>
                   {employee.role}
                 </span>

@@ -5,10 +5,10 @@ type SeverityBadgeProps = {
 };
 
 const severityStyles: Record<string, string> = {
-  CRITICAL: "bg-[#fee2e2] text-[#b91c1c]",
-  HIGH: "bg-[#fef3c7] text-[#b45309]",
-  MEDIUM: "bg-[#e0f2fe] text-[#0369a1]",
-  LOW: "bg-[#e2e8f0] text-[#475569]",
+  CRITICAL: "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
+  HIGH: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
+  MEDIUM: "bg-sky-100 text-sky-700 dark:bg-sky-900/30 dark:text-sky-400",
+  LOW: "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400",
 };
 
 export function SeverityBadge({ level }: SeverityBadgeProps) {

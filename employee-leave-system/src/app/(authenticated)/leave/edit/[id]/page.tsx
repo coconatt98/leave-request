@@ -76,7 +76,7 @@ export default function EditLeaveRequestPage({
     return (
       <div className="space-y-6">
         <PageHeader title="Edit Leave Request" description="Update the details of this leave request" />
-        <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm space-y-4">
+        <div className="bg-slate-50 dark:bg-[#263646] p-6 rounded-[10px] border border-slate-200 dark:border-[#627283] shadow-sm space-y-4">
           <div className="space-y-2">
             <Skeleton className="h-4 w-32 bg-[#2b2b2d]" />
             <Skeleton className="h-10 w-full bg-[#2b2b2d]" />
@@ -110,7 +110,7 @@ export default function EditLeaveRequestPage({
         title="Edit Leave Request"
         description="Update the details of this leave request"
       />
-      <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm">
+      <div className="bg-slate-50 dark:bg-[#263646] p-6 rounded-[10px] border border-slate-200 dark:border-[#627283] shadow-sm">
         <LeaveRequestForm
           defaultValues={{
             employeeId: request.employeeId,

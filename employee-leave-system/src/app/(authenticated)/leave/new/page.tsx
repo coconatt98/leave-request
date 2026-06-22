@@ -36,7 +36,7 @@ export default function NewLeaveRequestPage() {
         title="New Leave Request" 
         description="Submit a new request for time off"
       />
-      <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm">
+      <div className="bg-slate-50 dark:bg-[#263646] p-6 rounded-[10px] border border-slate-200 dark:border-[#627283] shadow-sm">
         <LeaveRequestForm onSubmit={onSubmit} isLoading={isLoading} />
       </div>
     </div>

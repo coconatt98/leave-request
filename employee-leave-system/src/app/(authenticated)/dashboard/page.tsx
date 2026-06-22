@@ -56,8 +56,8 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
         {stats.isLoading ? (
           <>
-            <Skeleton className="h-[380px] w-full rounded-2xl bg-slate-50 dark:bg-[#263646]" />
-            <Skeleton className="h-[380px] w-full rounded-2xl bg-slate-50 dark:bg-[#263646]" />
+            <Skeleton className="h-[420px] w-full rounded-2xl bg-slate-50 dark:bg-[#263646]" />
+            <Skeleton className="h-[420px] w-full rounded-2xl bg-slate-50 dark:bg-[#263646]" />
           </>
         ) : (
           <>

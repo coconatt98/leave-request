@@ -6,6 +6,21 @@ type DepartmentBarChartProps = {
   data: Array<{ department: string; count: number }>;
 };
 
+const CustomXAxisTick = ({ x, y, payload }: any) => {
+  const words = payload.value.split(" ");
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <text x={0} y={0} dy={22} textAnchor="middle" fill="#64748b" fontSize={11}>
+        {words.map((word: string, index: number) => (
+          <tspan x={0} dy={index === 0 ? 0 : 14} key={index}>
+            {word}
+          </tspan>
+        ))}
+      </text>
+    </g>
+  );
+};
+
 export function DepartmentBarChart({ data }: DepartmentBarChartProps) {
   if (!data || data.length === 0) {
     return (
@@ -16,7 +31,7 @@ export function DepartmentBarChart({ data }: DepartmentBarChartProps) {
   }
 
   return (
-    <div className="h-[300px] w-full mt-4">
+    <div className="h-[350px] w-full mt-4">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
@@ -24,15 +39,16 @@ export function DepartmentBarChart({ data }: DepartmentBarChartProps) {
             top: 5,
             right: 30,
             left: 0,
-            bottom: 25,
+            bottom: 55,
           }}
         >
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.3} />
+            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.3} />
           <XAxis 
             dataKey="department" 
-            tick={{ fill: "#64748b", fontSize: 12 }} 
+            tick={<CustomXAxisTick />} 
             tickMargin={10} 
             axisLine={{ stroke: "#334155", opacity: 0.5 }}
+            interval={0}
           />
           <YAxis 
             allowDecimals={false} 

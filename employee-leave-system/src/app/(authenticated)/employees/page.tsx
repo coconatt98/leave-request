@@ -9,13 +9,14 @@ import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { EmployeeTable } from "@/components/employee/EmployeeTable";
 import { EmployeeDeleteDialog } from "@/components/employee/EmployeeDeleteDialog";
+import { TableSkeleton } from "@/components/shared/TableSkeleton";
 import { useEmployees } from "@/hooks/useEmployees";
 import { useAuth } from "@/hooks/useAuth";
 import { Employee } from "@/types/employee";
 import { cn } from "@/lib/utils";
 
 export default function EmployeesPage() {
-  const { employees, deleteEmployee, searchEmployees } = useEmployees();
+  const { employees, isLoading, deleteEmployee, searchEmployees } = useEmployees();
   const { role } = useAuth();
   const [searchQuery, setSearchQuery] = useState("");
   const [deleteTarget, setDeleteTarget] = useState<Employee | null>(null);
@@ -60,10 +61,14 @@ export default function EmployeesPage() {
         />
       </div>
 
-      <EmployeeTable 
-        employees={employees} 
-        onDelete={(emp) => setDeleteTarget(emp)} 
-      />
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <EmployeeTable 
+          employees={employees} 
+          onDelete={(emp) => setDeleteTarget(emp)} 
+        />
+      )}
 
       <EmployeeDeleteDialog
         employee={deleteTarget}

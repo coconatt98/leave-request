@@ -9,6 +9,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { LeaveRequestTable } from "@/components/leave/LeaveRequestTable";
 import { ConfirmDialog } from "@/components/shared/ConfirmDialog";
+import { TableSkeleton } from "@/components/shared/TableSkeleton";
 import { useLeaveRequests } from "@/hooks/useLeaveRequests";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ export default function LeaveRequestsPage() {
   const router = useRouter();
   const {
     leaveRequests,
+    isLoading,
     statusFilter,
     setStatusFilter,
     approveRequest,
@@ -32,7 +34,7 @@ export default function LeaveRequestsPage() {
 
   const [confirmAction, setConfirmAction] = useState<ConfirmAction>(null);
 
-  const canCreateRequest = auth.role === "ADMIN" || auth.role === "INPUTTER";
+  const canCreateRequest = !!auth.role;
 
   const handleConfirm = async () => {
     if (!confirmAction) return;
@@ -81,13 +83,17 @@ export default function LeaveRequestsPage() {
         ))}
       </div>
 
-      <LeaveRequestTable
-        leaveRequests={leaveRequests}
-        onApprove={(id) => setConfirmAction({ type: "approve", id })}
-        onReject={(id) => setConfirmAction({ type: "reject", id })}
-        onEdit={(id) => router.push(`/leave/edit/${id}`)}
-        onDelete={(id) => setConfirmAction({ type: "delete", id })}
-      />
+      {isLoading ? (
+        <TableSkeleton />
+      ) : (
+        <LeaveRequestTable
+          leaveRequests={leaveRequests}
+          onApprove={(id) => setConfirmAction({ type: "approve", id })}
+          onReject={(id) => setConfirmAction({ type: "reject", id })}
+          onEdit={(id) => router.push(`/leave/edit/${id}`)}
+          onDelete={(id) => setConfirmAction({ type: "delete", id })}
+        />
+      )}
 
       <ConfirmDialog
         open={!!confirmAction}

@@ -16,12 +16,7 @@ export default function NewLeaveRequestPage() {
   const { createLeaveRequest } = useLeaveRequests();
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (auth.role && auth.role !== "ADMIN" && auth.role !== "INPUTTER") {
-      toast.error("Unauthorized access");
-      router.push("/leave");
-    }
-  }, [auth.role, router]);
+  // All roles (ADMIN, INPUTTER, APPROVER) can access this page
 
   const onSubmit = async (data: LeaveFormData) => {
     setIsLoading(true);

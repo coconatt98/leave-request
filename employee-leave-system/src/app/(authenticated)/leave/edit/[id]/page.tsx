@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { Skeleton } from "@/components/ui/skeleton";
 import { LeaveRequestForm } from "@/components/leave/LeaveRequestForm";
 import { useLeaveRequests } from "@/hooks/useLeaveRequests";
 import { LeaveRequest } from "@/types/leave";
@@ -72,7 +73,35 @@ export default function EditLeaveRequestPage({
   };
 
   if (isLoading || !request) {
-    return <div className="py-12 text-center text-slate-500">Loading...</div>;
+    return (
+      <div className="space-y-6">
+        <PageHeader title="Edit Leave Request" description="Update the details of this leave request" />
+        <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm space-y-4">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-32 bg-[#2b2b2d]" />
+            <Skeleton className="h-10 w-full bg-[#2b2b2d]" />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-24 bg-[#2b2b2d]" />
+              <Skeleton className="h-10 w-full bg-[#2b2b2d]" />
+            </div>
+            <div className="space-y-2">
+              <Skeleton className="h-4 w-24 bg-[#2b2b2d]" />
+              <Skeleton className="h-10 w-full bg-[#2b2b2d]" />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-16 bg-[#2b2b2d]" />
+            <Skeleton className="h-24 w-full bg-[#2b2b2d]" />
+          </div>
+          <div className="flex gap-2 pt-2">
+            <Skeleton className="h-10 w-20 bg-[#2b2b2d]" />
+            <Skeleton className="h-10 w-20 bg-[#2b2b2d]" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

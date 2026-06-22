@@ -4,6 +4,7 @@ import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { Skeleton } from "@/components/ui/skeleton";
 import { EmployeeForm } from "@/components/employee/EmployeeForm";
 import { EmployeeFormData } from "@/validators/employee-schema";
 import { Employee } from "@/types/employee";
@@ -52,7 +53,23 @@ export default function EditEmployeePage({ params }: { params: Promise<{ id: str
   };
 
   if (isLoading) {
-    return <div className="py-12 text-center text-slate-500">Loading...</div>;
+    return (
+      <div className="space-y-6">
+        <PageHeader title="Edit Employee" description="Update employee details" />
+        <div className="bg-[#263646] p-6 rounded-[10px] border border-[#627283] shadow-sm space-y-4 max-w-lg">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="space-y-2">
+              <Skeleton className="h-4 w-24 bg-[#2b2b2d]" />
+              <Skeleton className="h-10 w-full bg-[#2b2b2d]" />
+            </div>
+          ))}
+          <div className="flex gap-2 pt-2">
+            <Skeleton className="h-10 w-20 bg-[#2b2b2d]" />
+            <Skeleton className="h-10 w-20 bg-[#2b2b2d]" />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

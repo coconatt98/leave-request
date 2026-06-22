@@ -26,6 +26,8 @@ export function EmployeeForm({
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<EmployeeFormData>({
     resolver: zodResolver(employeeSchema),
@@ -37,6 +39,15 @@ export function EmployeeForm({
       reset(defaultValues);
     }
   }, [defaultValues, reset]);
+
+  const currentPosition = watch("position");
+  const currentRole = watch("role");
+
+  useEffect(() => {
+    if (currentPosition !== "Manager" && currentRole === "APPROVER") {
+      setValue("role", "INPUTTER");
+    }
+  }, [currentPosition, currentRole, setValue]);
 
   return (
     <form
@@ -95,13 +106,17 @@ export function EmployeeForm({
         >
           Position
         </Label>
-        <Input
+        <select
           id="position"
-          placeholder="e.g. Software Engineer"
-          className="border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40"
+          className="flex h-9 w-full rounded-md border border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] px-3 py-1 text-sm text-white shadow-sm transition-colors focus-visible:outline-none focus-visible:border-[#ff4d57] focus-visible:ring-1 focus-visible:ring-[#ff949a]/40"
           {...register("position")}
           aria-describedby={errors.position ? "position-error" : undefined}
-        />
+        >
+          <option value="">Select a position</option>
+          <option value="Developer">Developer</option>
+          <option value="Team Lead">Team Lead</option>
+          <option value="Manager">Manager</option>
+        </select>
         {errors.position && (
           <p id="position-error" className="text-sm text-[#ff949a]">
             {errors.position.message}
@@ -124,7 +139,7 @@ export function EmployeeForm({
           aria-describedby={errors.role ? "role-error" : undefined}
         >
           <option value="INPUTTER">Inputter</option>
-          <option value="APPROVER">Approver</option>
+          <option value="APPROVER" disabled={currentPosition !== "Manager"}>Approver</option>
           <option value="ADMIN">Admin</option>
         </select>
         {errors.role && (

@@ -18,6 +18,7 @@ import {
 import { formSectionClass } from "@/components/shared/telkomselStyles";
 import { leaveSchema, type LeaveFormData } from "@/validators/leave-schema";
 import { useEmployees } from "@/hooks/useEmployees";
+import { useAuth } from "@/hooks/useAuth";
 
 type LeaveRequestFormProps = {
   onSubmit: (data: LeaveFormData) => void;
@@ -34,12 +35,21 @@ export function LeaveRequestForm({
 }: LeaveRequestFormProps) {
   const router = useRouter();
   const { employees } = useEmployees();
+  const { role, username } = useAuth();
+
+  const filteredEmployees = employees.filter((emp) => {
+    if (role === "INPUTTER") {
+      return emp.username === username;
+    }
+    return true;
+  });
 
   const {
     register,
     handleSubmit,
     control,
     reset,
+    watch,
     formState: { errors },
   } = useForm<LeaveFormData>({
     resolver: zodResolver(leaveSchema),
@@ -52,6 +62,14 @@ export function LeaveRequestForm({
     }
   }, [defaultValues, reset]);
 
+  // Auto-select if there's only one employee option (e.g., for INPUTTER)
+  useEffect(() => {
+    const currentVal = control._formValues.employeeId;
+    if (filteredEmployees.length === 1 && !currentVal) {
+      reset((prev) => ({ ...prev, employeeId: filteredEmployees[0].id }));
+    }
+  }, [filteredEmployees, control, reset]);
+
   const isDisabled = isLoading || isReadOnly;
   const submitLabel = isReadOnly
     ? "Request Locked"
@@ -61,6 +79,13 @@ export function LeaveRequestForm({
 
   const fieldClasses =
     "border-[rgba(255,90,95,0.35)] bg-[#2b2b2d] text-white placeholder:text-[#7b7b81] focus-visible:border-[#ff4d57] focus-visible:ring-[#ff949a]/40 disabled:bg-[#1a1a1c]";
+
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().split("T")[0];
+
+  const startDateValue = watch("startDate");
+  const endDateMin = startDateValue || minDate;
 
   return (
     <form
@@ -93,21 +118,21 @@ export function LeaveRequestForm({
                 }
               >
                 <SelectValue placeholder="Select an employee">
-                  {field.value && employees.length > 0
+                  {field.value && filteredEmployees.length > 0
                     ? (() => {
-                        const selected = employees.find((e) => e.id === field.value);
+                        const selected = filteredEmployees.find((e) => e.id === field.value);
                         return selected ? `${selected.name} — ${selected.position}` : field.value;
                       })()
                     : undefined}
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                {employees.length === 0 ? (
+                {filteredEmployees.length === 0 ? (
                   <SelectItem value="__empty__" disabled>
                     No employees available
                   </SelectItem>
                 ) : (
-                  employees.map((emp) => (
+                  filteredEmployees.map((emp) => (
                     <SelectItem key={emp.id} value={emp.id}>
                       {emp.name} — {emp.position}
                     </SelectItem>
@@ -136,6 +161,7 @@ export function LeaveRequestForm({
           id="startDate"
           type="date"
           disabled={isDisabled}
+          min={minDate}
           className={fieldClasses}
           {...register("startDate")}
           aria-describedby={errors.startDate ? "startDate-error" : undefined}
@@ -159,6 +185,7 @@ export function LeaveRequestForm({
           id="endDate"
           type="date"
           disabled={isDisabled}
+          min={endDateMin}
           className={fieldClasses}
           {...register("endDate")}
           aria-describedby={errors.endDate ? "endDate-error" : undefined}

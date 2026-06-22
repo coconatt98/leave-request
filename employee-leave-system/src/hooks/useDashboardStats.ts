@@ -18,12 +18,16 @@ export function useDashboardStats() {
     rejectedRequests: 0,
   });
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const loadStats = useCallback(async () => {
     try {
       const data = await getDashboardStatsAction();
       setStats(data);
     } catch (e) {
       console.error("Failed to load stats", e);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -36,5 +40,5 @@ export function useDashboardStats() {
     return () => clearInterval(interval);
   }, [loadStats]);
 
-  return stats;
+  return { ...stats, isLoading };
 }

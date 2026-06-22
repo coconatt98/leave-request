@@ -3,7 +3,14 @@ import { z } from "zod";
 export const leaveSchema = z
   .object({
     employeeId: z.string().min(1, "Employee is required"),
-    startDate: z.string().min(1, "Start date is required"),
+    startDate: z.string().min(1, "Start date is required").refine((val) => {
+      const start = new Date(val);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return start > today;
+    }, {
+      message: "Start date must be after today",
+    }),
     endDate: z.string().min(1, "End date is required"),
     reason: z
       .string()
